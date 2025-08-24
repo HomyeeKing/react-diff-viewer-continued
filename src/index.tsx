@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import {computeLineInformation, DiffInformation, DiffMethod, DiffType, LineInformation,} from './compute-lines';
-import computeStyles, {ReactDiffViewerStyles, ReactDiffViewerStylesOverride,} from './styles';
-import {ReactElement} from "react";
-import {computeHiddenBlocks} from "./compute-hidden-blocks";
+import { computeLineInformation, DiffInformation, DiffMethod, DiffType, LineInformation, } from './compute-lines';
+import computeStyles, { ReactDiffViewerStyles, ReactDiffViewerStylesOverride, } from './styles';
+import { ReactElement } from "react";
+import { computeHiddenBlocks } from "./compute-hidden-blocks";
 
 const m = require('memoize-one');
 
@@ -74,8 +74,8 @@ export interface ReactDiffViewerProps {
   leftTitle?: string | ReactElement;
   // Title for left column
   rightTitle?: string | ReactElement;
-  	// Nonce
-	nonce?: string;
+  // Nonce
+  nonce?: string;
 }
 
 export interface ReactDiffViewerState {
@@ -163,7 +163,7 @@ class DiffViewer extends React.Component<
     if (this.props.onLineNumberClick) {
       return (e: any): void => this.props.onLineNumberClick(id, e);
     }
-    return (): void => {};
+    return (): void => { };
   };
 
   /**
@@ -266,14 +266,14 @@ class DiffViewer extends React.Component<
         )}
         {this.props.renderGutter
           ? this.props.renderGutter({
-              lineNumber,
-              type,
-              prefix,
-              value,
-              additionalLineNumber,
-              additionalPrefix,
-              styles: this.styles,
-            })
+            lineNumber,
+            type,
+            prefix,
+            value,
+            additionalLineNumber,
+            additionalPrefix,
+            styles: this.styles,
+          })
           : null}
         {!this.props.hideMarkers && (
           <td
@@ -292,6 +292,7 @@ class DiffViewer extends React.Component<
           </td>
         )}
         <td
+          colSpan={Number.POSITIVE_INFINITY}
           className={cn(this.styles.content, {
             [this.styles.emptyLine]: !content,
             [this.styles.diffAdded]: added,
@@ -416,8 +417,8 @@ class DiffViewer extends React.Component<
    */
   private onBlockClickProxy =
     (id: number): any =>
-    (): void =>
-      this.onBlockExpand(id);
+      (): void =>
+        this.onBlockExpand(id);
 
   /**
    * Generates cold fold block. It also uses the custom message renderer when available to show
@@ -444,13 +445,7 @@ class DiffViewer extends React.Component<
     ) : (
       <pre className={this.styles.codeFoldContent}>Expand {num} lines ...</pre>
     );
-    const content = (
-      <td>
-        <a onClick={this.onBlockClickProxy(blockNumber)} tabIndex={0}>
-          {message}
-        </a>
-      </td>
-    );
+    const content = message;
     const isUnifiedViewWithoutLineNumbers = !splitView && !hideLineNumbers;
     return (
       <tr
@@ -461,28 +456,19 @@ class DiffViewer extends React.Component<
         {this.props.renderGutter ? (
           <td className={this.styles.codeFoldGutter} />
         ) : null}
-        <td
-          className={cn({
-            [this.styles.codeFoldGutter]: isUnifiedViewWithoutLineNumbers,
-          })}
-        />
-
-        {/* Swap columns only for unified view without line numbers */}
-        {isUnifiedViewWithoutLineNumbers ? (
-          <React.Fragment>
-            <td />
-            {content}
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {content}
-            {this.props.renderGutter ? <td /> : null}
-            <td />
-          </React.Fragment>
-        )}
-
-        <td />
-        <td />
+        <td colSpan={Number.POSITIVE_INFINITY}>
+          {/* Swap columns only for unified view without line numbers */}
+          {isUnifiedViewWithoutLineNumbers ? (
+            <React.Fragment>
+              {content}
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {content}
+              {this.props.renderGutter ? <td /> : null}
+            </React.Fragment>
+          )}
+        </td>
       </tr>
     );
   };

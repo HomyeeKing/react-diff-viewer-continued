@@ -1,6 +1,6 @@
 {
   "name": "@homy/react-diff-viewer",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.8",
   "private": false,
   "publishConfig": {
     "access": "public"
