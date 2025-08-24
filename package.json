@@ -1,7 +1,10 @@
 {
-  "name": "react-diff-viewer-continued",
-  "version": "3.4.0",
+  "name": "@homy/react-diff-viewer",
+  "version": "1.0.0-beta.4",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Continuation of a simple and beautiful text diff viewer component made with diff and React",
   "keywords": [
     "review",
@@ -13,7 +16,7 @@
     "react-component",
     "ui"
   ],
-  "repository": "git@github.com:aeolun/react-diff-viewer-continued.git",
+  "repository": "git@github.com:HomyeeKing/react-diff-viewer-continued.git",
   "license": "MIT",
   "authors": [
     "Pranesh Ravi<praneshpranesh@gmail.com>",
